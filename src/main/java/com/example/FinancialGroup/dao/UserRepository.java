@@ -12,6 +12,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
 
-    @Query(value = "select u.groups from User u where u.id=:userid")
-    List<Group> getGroups(@Param("userid") Long userid);
+    @Query(value = "select u.groups from User u where u.id=:userId")
+    List<Group> getGroups(@Param(value = "userId") Long userId);
+
+
+
 }

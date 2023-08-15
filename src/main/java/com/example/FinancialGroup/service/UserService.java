@@ -5,6 +5,7 @@ import com.example.FinancialGroup.dao.UserRepository;
 import com.example.FinancialGroup.dto.ApiResponseDto;
 import com.example.FinancialGroup.dto.GroupDto;
 import com.example.FinancialGroup.dto.UserDto;
+import com.example.FinancialGroup.entity.Group;
 import com.example.FinancialGroup.entity.User;
 import com.example.FinancialGroup.enums.StatusCode;
 import com.example.FinancialGroup.enums.StatusMessage;
@@ -12,10 +13,15 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -77,12 +83,20 @@ public class UserService {
         return responseDto;
     }
 
+
+
+
     public ApiResponseDto getUserGroups(Long id){
-        User user=this.userRepository.getById(id);
+        User user=this.userRepository.findById(id).orElse(null);
         ApiResponseDto responseDto=new ApiResponseDto<>();
+        List<Group> g=this.userRepository.getGroups(id);
         if(user!=null){
+            List<GroupDto> groups= this.userRepository.getGroups(id)
+                    .stream()
+                    .map(group -> this.modelMapper.map(group,GroupDto.class))
+                    .collect(Collectors.toList());
             responseDto=ApiResponseDto.builder()
-                    .responseData(this.modelMapper.map(this.userRepository.getGroups(id), GroupDto.class))
+                    .responseData(groups)
                     .code(StatusCode.SUCCESS)
                     .message(StatusMessage.SUCCESS)
                     .build();

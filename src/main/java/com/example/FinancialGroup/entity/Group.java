@@ -38,6 +38,7 @@ public class Group {
     private Date endDate;
 
     @ManyToMany(mappedBy = "groups")
+    @ToString.Exclude
     private List<User> users;
 
     public Group(Long price, int numMembers, String creator, Date stDate, Date endDate) {
@@ -47,4 +48,6 @@ public class Group {
         this.stDate = stDate;
         this.endDate = endDate;
     }
+
+
 }

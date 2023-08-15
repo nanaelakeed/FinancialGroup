@@ -44,10 +44,10 @@ public class User {
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "group_users",
-    joinColumns = {@JoinColumn(name = "group_id")},
-    inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    inverseJoinColumns = {@JoinColumn(name = "group_id",referencedColumnName = "id")},
+    joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")})
     @ToString.Exclude
-    private List<Group> groups;
+    List<Group> groups;
 
 
 }

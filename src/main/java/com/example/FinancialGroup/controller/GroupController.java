@@ -21,6 +21,16 @@ public class GroupController {
         return this.groupService.saveGroup(group);
     }
 
+    @PostMapping("/{group_id}/{user_id}")
+    public ApiResponseDto saveUserGroup(@PathVariable Long group_id,@PathVariable Long user_id){
+        return this.groupService.saveUserGroup(group_id,user_id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ApiResponseDto deleteGroup(@PathVariable Long id){return this.groupService.deleteGroup(id);}
+
+    @GetMapping(path = "/{groupId}")
+    public ApiResponseDto groupUsers(@PathVariable Long groupId){
+        return this.groupService.groupUsers(groupId);
+    }
 }

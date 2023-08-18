@@ -16,7 +16,7 @@ import java.util.Date;
 public class CreditCard {
     @Id
     @Column(name = "cridit_number")
-    private Long creditNumber;
+    private String creditNumber;
 
     @Column(name = "bank_name")
     private String bankName;
@@ -32,7 +32,7 @@ public class CreditCard {
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-    public CreditCard(Long creditNumber, String bankName, Long cvv, Date expireDate) {
+    public CreditCard(String creditNumber, String bankName, Long cvv, Date expireDate) {
         this.creditNumber = creditNumber;
         this.bankName = bankName;
         this.cvv = cvv;

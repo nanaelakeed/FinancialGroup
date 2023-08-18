@@ -13,9 +13,12 @@ public enum StatusMessage {
     MANDATORY_EXPECTED,
     CONFLICT,
 
+    Incorrect_password,
+    Invalid_email,
     CREATED,
     SUCCESS,
     INVALID_NUMBER_OF_TRAILS,
+    Credit_Card_number_Invalid,
     IS_EXPIRED,
     SECURITY_ISSUE,
 }

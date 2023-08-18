@@ -1,6 +1,7 @@
 package com.example.FinancialGroup.AOP;
 
 
+import com.example.FinancialGroup.dao.GroupRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     private final Logger LOGGER = LoggerFactory.getLogger(Config.class);
+    private GroupRepository groupRepository;
 
     @Before("execution(* com.example.FinancialGroup.AOP.*.*(..))")
     public void beforeAdvice(JoinPoint joinPoint){
@@ -29,4 +31,7 @@ public class Config {
         System.out.println("arounddddddddd");
         LOGGER.info(joinPoint.getSignature().getName());
     }
+
+
+
 }

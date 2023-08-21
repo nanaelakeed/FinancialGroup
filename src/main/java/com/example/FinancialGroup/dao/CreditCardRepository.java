@@ -15,4 +15,5 @@ public interface CreditCardRepository extends JpaRepository<CreditCard, String> 
 
     @Query(value = "select c from CreditCard c where c.user.id=:user_id")
     List<CreditCard> findByUserId(@Param(value = "user_id")Long user_id);
+
 }

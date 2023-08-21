@@ -24,4 +24,9 @@ public class CreditCardController {
     public ApiResponseDto getAllCards(){
         return this.cardService.getAllCards();
     }
+
+    @GetMapping("/{userId}")
+    private ApiResponseDto gerUserCards(@PathVariable Long userId){
+        return this.cardService.getUserCards(userId);
+    }
 }

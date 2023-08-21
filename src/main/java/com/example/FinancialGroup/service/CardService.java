@@ -21,6 +21,7 @@ public class CardService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final CreditCardRepository creditCardRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
     public ApiResponseDto saveCard(CardDto card){
         if(this.creditCardRepository.findCreditCardByCreditNumber(card.getCreditNumber())!=null){
@@ -53,6 +54,22 @@ public class CardService {
                 )
                 .message(StatusMessage.SUCCESS)
                 .build();
+    }
+
+    public ApiResponseDto getUserCards(Long userId){
+        if(this.userService.getUserById(userId).getResponseData()==null){
+            return ApiResponseDto.builder()
+                    .message(StatusMessage.NOT_FOUND)
+                    .responseData(null)
+                    .build();
+        }else{
+            return ApiResponseDto.builder()
+                    .responseData(this.creditCardRepository.findByUserId(userId)
+                            .stream()
+                            .map(creditCard -> this.modelMapper.map(creditCard,CardDto.class)).collect(Collectors.toList()))
+                    .message(StatusMessage.SUCCESS)
+                    .build();
+        }
     }
 
 }

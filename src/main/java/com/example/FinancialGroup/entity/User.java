@@ -36,6 +36,9 @@ public class User {
     @Column(name = "salary")
     private Long salary;
 
+    @Column(name = "session_id")
+    private String session_id;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     @ToString.Exclude

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
+
     private final UserService userService;
 
     @PostMapping
@@ -40,5 +41,10 @@ public class UserController {
     @GetMapping("/login")
     public ApiResponseDto login(@RequestBody LoginRequestDto loginRequestDto){
         return this.userService.login(loginRequestDto);
+    }
+
+    @GetMapping("/jwtLogin")
+    public ApiResponseDto jwtLogin(@RequestBody LoginRequestDto loginRequestDto){
+        return this.userService.jwtLogin(loginRequestDto);
     }
 }
